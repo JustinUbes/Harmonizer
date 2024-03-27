@@ -1,12 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import RecordScreen from './screens/RecordScreen.js';
+import PlaybackScreen from './screens/PlaybackScreen.js';
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Test github</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen name = "Record" component = {RecordScreen}></Drawer.Screen>
+        <Drawer.Screen name = "Playback" component = {PlaybackScreen}></Drawer.Screen>
+      </Drawer.Navigator>
+    </NavigationContainer>
+
   );
 }
 
