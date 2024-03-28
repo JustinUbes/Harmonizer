@@ -1,10 +1,18 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import RecordScreen from './screens/RecordScreen.js';
 import PlaybackScreen from './screens/PlaybackScreen.js';
 
 const Drawer = createDrawerNavigator();
+
+function customDrawerContent(props){
+  return(
+    <DrawerContentScrollView {...props}>
+      
+    </DrawerContentScrollView>
+  )
+}
 
 export default function App() {
   return (
