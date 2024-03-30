@@ -1,6 +1,9 @@
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { Audio } from 'expo-av';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addRec, delRec } from '../store/redux/recordings.js';
+import { getCurrentDate } from '../utils/CurrentDate.js';
 import styles from '../styles.js';
 import AppButton from '../components/AppButton.js';
 
@@ -8,6 +11,9 @@ function RecordScreen(props){
     const [recording, setRecording] = useState(null); 
     const [permissionResponse, requestPermission] = Audio.usePermissions();
     const [recordingStatus, setRecordingStatus] = useState(0); 
+    const dispatch = useDispatch();
+    const recordingUris = useSelector((state) => state.allRecordings.recordings);
+    const date = new Date();
 
     async function startRecording(){
         try{
@@ -38,12 +44,16 @@ function RecordScreen(props){
     async function stopRecording(){
         console.log('Stopping recording...\n');
         setRecordingStatus(0); 
+        const { durationMillis } = await recording.getStatusAsync();
         await recording.stopAndUnloadAsync();
         await Audio.setAudioModeAsync({
             allowsRecordingIOS:false,
         });
 
         const uri = recording.getURI();
+        console.log(uri);
+        dispatch(addRec({uri:uri, date: getCurrentDate(), duration: durationMillis}));
+        console.log(recordingUris.map(recording => recording.duration))
         console.log('Recording stopped and stored at ',uri);
         setRecording(null); // 
     }

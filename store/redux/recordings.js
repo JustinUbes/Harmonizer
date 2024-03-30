@@ -3,14 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const recSlice = createSlice({
     name:"recordings",
     initialState:{
-        id: []
+        recordings: []
     },
     reducers: {
         addRec: (state,action) => {
-            state.ids = [...state.ids, action.payload.id];
+            state.recordings.push(action.payload);
         },
         delRec: (state,action) => {
-            state.ids = state.ids.filter(id => id !== action.payload.id);
+            state.recordings = state.recordings.filter(recording => recording.uri !== action.payload.uri);
         }
     }
 });
