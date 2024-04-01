@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import RecordScreen from './screens/RecordScreen.js';
 import PlaybackScreen from './screens/PlaybackScreen.js';
+import Settings from './screens/Settings.js';
 
 const Drawer = createDrawerNavigator();
 
@@ -25,6 +26,7 @@ export default function App() {
         <Drawer.Navigator>
           <Drawer.Screen name = "Record" component = {RecordScreen}></Drawer.Screen>
           <Drawer.Screen name = "Playback" component = {PlaybackScreen}></Drawer.Screen>
+          <Drawer.Screen name = "Settings" component = {Settings}></Drawer.Screen>
         </Drawer.Navigator>
         </NavigationContainer>
       </PersistGate>

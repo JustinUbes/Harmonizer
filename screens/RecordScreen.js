@@ -12,8 +12,6 @@ function RecordScreen(props){
     const [permissionResponse, requestPermission] = Audio.usePermissions();
     const [recordingStatus, setRecordingStatus] = useState(0); 
     const dispatch = useDispatch();
-    const recordingUris = useSelector((state) => state.allRecordings.recordings);
-    const date = new Date();
 
     async function startRecording(){
         try{
@@ -51,9 +49,8 @@ function RecordScreen(props){
         });
 
         const uri = recording.getURI();
-        console.log(uri);
-        dispatch(addRec({uri:uri, date: getCurrentDate(), duration: durationMillis}));
-        console.log(recordingUris.map(recording => recording.duration))
+        const milliToFloat = parseFloat(durationMillis);
+        dispatch(addRec({uri:uri, date: getCurrentDate(), duration: milliToFloat}));
         console.log('Recording stopped and stored at ',uri);
         setRecording(null); // 
     }

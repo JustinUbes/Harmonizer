@@ -24,6 +24,27 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         padding: 10,
 
+    },
+
+    playbackContainer:{
+        backgroundColor:harmonizerGreen,
+        borderRadius:5,
+        borderWidth:1,
+        padding:10,
+        padding:10
+    },
+
+    playbackButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      },
+
+    recordedText:{
+        color:harmonizerGreen,
+    },
+
+    lengthText:{
+        color:harmonizerGreen,
     }
 });
 
