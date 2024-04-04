@@ -1,5 +1,6 @@
-import { View, Text, Button } from 'react-native';
+import { View, Image } from 'react-native';
 import styles from '../styles.js';
+import AppButton from '../components/AppButton.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearRec } from '../store/redux/recordings.js';
 
@@ -12,8 +13,9 @@ function Settings(props){
     }
 
     return(
-        <View>
-            <Button title="Clear Recordings" onPress={clearAllRecordings}></Button>
+        <View style={styles.container}>
+            <Image source={require('../assets/splash.png')} style={styles.logoImage}></Image>
+            <AppButton title="Clear Recordings" onPress={clearAllRecordings}></AppButton>
         </View>
     )
 }

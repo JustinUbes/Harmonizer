@@ -16,11 +16,14 @@ const styles = StyleSheet.create({
         fontWeight:"bold",
         alignSelf:"center",
         textTransform:"uppercase",
+        fontFamily: 'Main'
     },
 
     container:{
         flex:1,
-        justifyContent: "center",
+        justifyContent: "space-evenly",
+        flexDirection:'column',
+        alignItems:'center',
         backgroundColor: 'black',
         padding: 10,
 
@@ -40,12 +43,56 @@ const styles = StyleSheet.create({
       },
 
     recordedText:{
-        color:harmonizerGreen,
+        color:'#000',
+        fontFamily:"Main"
     },
 
     lengthText:{
-        color:harmonizerGreen,
+        color:'#000',
+        fontFamily:"Main"
+    },
+
+    turntable: {
+        resizeMode:'contain',
+        width:200,
+        height: 200,
+        
+    },
+
+    logoImage:{
+        resizeMode:'contain',
+        width:200,
+        height:200
+    },
+
+    drawerContainer:{
+        backgroundColor:'black',
+        justifyContent:'flex-start',
+        flexDirection:"column",
+        height:'100%'
+    },
+
+    drawerItem: {
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: harmonizerGreen,
+      },
+
+    drawerItemText: {
+        fontSize: 18,
+        fontFamily: 'Main',
+        color: harmonizerGreen,
+    },
+
+    drawerHeader:{
+        backgroundColor:'black',
+    },
+
+    headerTitle:{
+        color:'black',
     }
+
 });
 
 export default styles;

@@ -1,10 +1,11 @@
-import { Text, View, FlatList } from 'react-native';
+import { View, FlatList, Image } from 'react-native';
 import { useState } from 'react';
 import { Audio } from 'expo-av';
 import { useDispatch, useSelector } from 'react-redux';
 import { delRec } from '../store/redux/recordings.js';
 import styles from '../styles.js';
 import PlaybackItem from '../components/PlaybackItem.js';
+import * as FileSystem from 'expo-file-system';
 
 function PlaybackScreen(props){
     const [isPlaying,setIsPlaying] = useState(false);
@@ -18,7 +19,6 @@ function PlaybackScreen(props){
                 console.log("Player not intialzed.");
                 return;
             }
-            console.log("Im in playAudio");
             await player.loadAsync({uri:uri},{},true);
 
             const playerStatus = await player.getStatusAsync();
@@ -57,6 +57,7 @@ function PlaybackScreen(props){
     async function deleteRecording(uri){
         try{
             dispatch(delRec({ uri: uri }));
+            await FileSystem.deleteAsync(uri);
         }
         catch(err){
             console.error(err);
@@ -83,6 +84,7 @@ function PlaybackScreen(props){
 
     return(
         <View style={styles.container}>
+            <Image source={require('../assets/logo.png')} style={styles.logoImage}></Image>
             <FlatList
                 data={recordingUris}
                 renderItem={renderItem}

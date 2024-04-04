@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, Image } from 'react-native';
 import { Audio } from 'expo-av';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -57,6 +57,7 @@ function RecordScreen(props){
 
     return(
         <View style={styles.container}>
+            <Image source={require('../assets/turntable.png')} style={styles.turntable}></Image>
             <AppButton title={recordingStatus ? 'Stop Recording' : 'Start Recording'} onPress={recordingStatus ? stopRecording : startRecording}></AppButton>
         </View>
     )
