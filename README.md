@@ -6,4 +6,4 @@ Users will record voice or instrument input and the app will return a version of
 <p>
 </p>
 
-<p>App artwork by Kevin Sieving.</p>
+<p>App artwork by Kevin Sieving. You can find his work here: https://www.chronickevportfolio.com/</p>
