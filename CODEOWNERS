@@ -1,0 +1,8 @@
+# CODEOWNERS file
+# Defines code owners for the repository
+
+# For all files, JustinUbes is the code owner
+*       @JustinUbes
+
+# For the master branch, JustinUbes is the only one allowed to merge
+master  @JustinUbes
