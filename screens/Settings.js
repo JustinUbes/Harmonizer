@@ -6,7 +6,6 @@ import { clearRec } from '../store/redux/recordings.js';
 
 function Settings(props){
     const dispatch = useDispatch();
-    const recordingUris = useSelector((state) => state.allRecordings.recordings);
 
     function clearAllRecordings(){
         dispatch(clearRec());
