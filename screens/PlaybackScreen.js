@@ -9,28 +9,29 @@ import * as FileSystem from 'expo-file-system';
 
 function PlaybackScreen(props){
     const [isPlaying,setIsPlaying] = useState(false);
+    const [currentAudioUri, setCurrentAudioUri] = useState(null);
     const dispatch = useDispatch();
     const recordingUris = useSelector((state) => state.allRecordings.recordings);
     const player = useRef(new Audio.Sound());
 
-async function playAudio(uri){
-    try{
-        if(!player.current){
-            console.log("Player not initialized.");
-            return;
+    async function playPauseAudio(uri){
+        try {
+            if (isPlaying) {
+                await stopPlaying();
+                setIsPlaying(false);
+            } else {
+                if (currentAudioUri !== uri) {
+                    await stopPlaying();
+                    await player.current.loadAsync({ uri: uri }, {}, true);
+                    setCurrentAudioUri(uri);
+                }
+                await player.current.playAsync();
+                setIsPlaying(true);
+            }
+        } catch(err) {
+            console.error("Error playing/pausing audio: ", err);
         }
-
-        await stopPlaying();
-
-        await player.current.loadAsync({uri:uri},{},true);
-
-        await player.current.playAsync();
-        setIsPlaying(true);
     }
-    catch(err){
-        console.error("Error playing audio: ",err);
-    }
-}
 
     async function stopPlaying(){
         try{
@@ -41,7 +42,9 @@ async function playAudio(uri){
             const playerStatus = await player.current.getStatusAsync();
 
             if(playerStatus.isLoaded){
+                await player.current.stopAsync();
                 await player.current.unloadAsync();
+                setCurrentAudioUri(null);
             }
 
             setIsPlaying(false);
@@ -72,7 +75,7 @@ async function playAudio(uri){
                 uri={item.uri}
                 date={item.date}
                 length={item.duration} 
-                onPlay={() => playAudio(item.uri)} 
+                onPlay={() => playPauseAudio(item.uri)} 
                 onDelete={() => deleteRecording(item.uri)}
                 onStop={() => stopPlaying()}
             />
