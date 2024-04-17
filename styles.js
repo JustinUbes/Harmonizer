@@ -91,6 +91,12 @@ const styles = StyleSheet.create({
 
     headerTitle:{
         color:'black',
+    },
+
+    timerText:{
+        color:harmonizerGreen,
+        fontFamily:"Main",
+        fontSize: 24,
     }
 
 });

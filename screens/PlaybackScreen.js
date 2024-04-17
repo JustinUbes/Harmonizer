@@ -1,5 +1,5 @@
 import { View, FlatList, Image } from 'react-native';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Audio } from 'expo-av';
 import { useDispatch, useSelector } from 'react-redux';
 import { delRec } from '../store/redux/recordings.js';
@@ -11,40 +11,37 @@ function PlaybackScreen(props){
     const [isPlaying,setIsPlaying] = useState(false);
     const dispatch = useDispatch();
     const recordingUris = useSelector((state) => state.allRecordings.recordings);
-    const player = new Audio.Sound();
+    const player = useRef(new Audio.Sound());
 
-    async function playAudio(uri){
-        try{
-            if(!player){
-                console.log("Player not intialzed.");
-                return;
-            }
-            await player.loadAsync({uri:uri},{},true);
-
-            const playerStatus = await player.getStatusAsync();
-
-            if(playerStatus.isLoaded){
-                if(!(playerStatus.isPlaying)){
-                    player.playAsync();
-                    setIsPlaying(true);
-                }
-            }
+async function playAudio(uri){
+    try{
+        if(!player.current){
+            console.log("Player not initialized.");
+            return;
         }
-        catch(err){
-            console.error("Error playing audio: ",err);
-        }
+
+        await stopPlaying();
+
+        await player.current.loadAsync({uri:uri},{},true);
+
+        await player.current.playAsync();
+        setIsPlaying(true);
     }
+    catch(err){
+        console.error("Error playing audio: ",err);
+    }
+}
 
     async function stopPlaying(){
         try{
-            if(!player){
+            if(!player.current){
                 console.log("Player not initialized.")
                 return;
             } 
-            const playerStatus = await player.getStatusAsync();
+            const playerStatus = await player.current.getStatusAsync();
 
             if(playerStatus.isLoaded){
-                await player.unloadAsync();
+                await player.current.unloadAsync();
             }
 
             setIsPlaying(false);
@@ -56,6 +53,9 @@ function PlaybackScreen(props){
 
     async function deleteRecording(uri){
         try{
+            if (isPlaying){
+                stopPlaying()
+            }
             dispatch(delRec({ uri: uri }));
             await FileSystem.deleteAsync(uri);
         }
