@@ -13,6 +13,11 @@ function PlaybackScreen(props){
     const dispatch = useDispatch();
     const recordingUris = useSelector((state) => state.allRecordings.recordings);
     const player = useRef(new Audio.Sound());
+    const [positionMap,setPositionMap] = useState({});
+
+    function setPosition(uri, newPosition) {
+        setPositionMap(prevPositionMap => ({ ...prevPositionMap, [uri]: newPosition }));
+    }
 
     async function playPauseAudio(uri){
         try {
@@ -25,6 +30,7 @@ function PlaybackScreen(props){
                     await player.current.loadAsync({ uri: uri }, {}, true);
                     setCurrentAudioUri(uri);
                 }
+                await player.current.setPositionAsync(positionMap[uri]);
                 await player.current.playAsync();
                 setIsPlaying(true);
             }
@@ -75,9 +81,9 @@ function PlaybackScreen(props){
                 uri={item.uri}
                 date={item.date}
                 length={item.duration} 
-                onPlay={() => playPauseAudio(item.uri)} 
+                onPlay={() => playPauseAudio(item.uri)}
                 onDelete={() => deleteRecording(item.uri)}
-                onStop={() => stopPlaying()}
+                setPosition={setPosition}
             />
         );
     }
