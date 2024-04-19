@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     playbackButtonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        padding:5
       },
 
     recordedText:{

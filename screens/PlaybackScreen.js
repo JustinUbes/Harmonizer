@@ -1,5 +1,5 @@
 import { View, FlatList, Image } from 'react-native';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Audio } from 'expo-av';
 import { useDispatch, useSelector } from 'react-redux';
 import { delRec } from '../store/redux/recordings.js';

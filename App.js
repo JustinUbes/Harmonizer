@@ -1,7 +1,7 @@
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView } from '@react-navigation/drawer';
 import { store,persistor } from './store/redux/store.js';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';

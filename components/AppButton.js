@@ -1,4 +1,4 @@
-import { TouchableOpacity, StyleSheet, Text } from "react-native";
+import { TouchableOpacity, Text } from "react-native";
 import styles from '../styles.js'
 
 function AppButton({onPress,title}){

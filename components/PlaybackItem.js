@@ -4,10 +4,13 @@ import Slider from '@react-native-community/slider';
 import { formatTime } from '../utils/FormatTime.js';
 import styles from '../styles.js';
 import AppButton from '../components/AppButton.js';
+import PlayPauseButton from '../components/PlayPauseButton.js';
+import TrashButton from './TrashButton.js';
 
 function PlaybackItem({uri,date,length,onPlay,onDelete,setPosition}){
     const [position,localSetPosition] = useState(0);
-   
+
+
     function onSeek(val){
         localSetPosition(val);
         setPosition(uri,val);
@@ -18,7 +21,7 @@ function PlaybackItem({uri,date,length,onPlay,onDelete,setPosition}){
     return(
         <View style={styles.playbackContainer}>
             <Text style={styles.recordedText}>Recorded: {date}</Text>
-            <Text style={styles.lengthText}>Length: {formatTime(length)}</Text> 
+            <Text></Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Text style={styles.lengthText}>{formatTime(position)}</Text>
                 <Slider
@@ -34,8 +37,8 @@ function PlaybackItem({uri,date,length,onPlay,onDelete,setPosition}){
                 <Text style={styles.lengthText}>{formatTime(length)}</Text>
             </View>
             <View style={styles.playbackButtonContainer}>
-                <AppButton onPress={onPlay} title="Play"></AppButton>
-                <AppButton onPress={onDelete} title="Delete"></AppButton>
+                <PlayPauseButton onPress={onPlay}></PlayPauseButton>
+                <TrashButton onPress={onDelete}></TrashButton>
             </View>
         </View>
     )
