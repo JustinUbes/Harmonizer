@@ -98,6 +98,13 @@ const styles = StyleSheet.create({
         color:harmonizerGreen,
         fontFamily:"Main",
         fontSize: 24,
+    },
+
+    textInputText:{
+        color:'#000',
+        fontFamily:"Main",
+        fontSize:20,
+        height:40
     }
 
 });

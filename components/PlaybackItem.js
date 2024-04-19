@@ -1,5 +1,5 @@
-import { View, Text, Button } from 'react-native';
-import { useState, useEffect } from 'react';
+import { View, Text, TextInput } from 'react-native';
+import { useState } from 'react';
 import Slider from '@react-native-community/slider';
 import { formatTime } from '../utils/FormatTime.js';
 import styles from '../styles.js';
@@ -19,6 +19,9 @@ function PlaybackItem({uri,date,length,onPlay,onDelete,setPosition}){
 
     return(
         <View style={styles.playbackContainer}>
+            <View style={{alignItems:'center'}}>
+            <TextInput placeholder="Title" maxLength={40} style={styles.textInputText}></TextInput>
+            </View>
             <View style={{alignItems:'center'}}>
             <Text style={styles.recordedText}>{date}</Text>
             </View>
