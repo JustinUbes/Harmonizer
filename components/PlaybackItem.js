@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Slider from '@react-native-community/slider';
 import { formatTime } from '../utils/FormatTime.js';
 import styles from '../styles.js';
-import AppButton from '../components/AppButton.js';
 import PlayPauseButton from '../components/PlayPauseButton.js';
 import TrashButton from './TrashButton.js';
 
@@ -20,8 +19,9 @@ function PlaybackItem({uri,date,length,onPlay,onDelete,setPosition}){
 
     return(
         <View style={styles.playbackContainer}>
-            <Text style={styles.recordedText}>Recorded: {date}</Text>
-            <Text></Text>
+            <View style={{alignItems:'center'}}>
+            <Text style={styles.recordedText}>{date}</Text>
+            </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Text style={styles.lengthText}>{formatTime(position)}</Text>
                 <Slider

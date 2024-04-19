@@ -76,6 +76,7 @@ function PlaybackScreen(props){
 
     function renderItem({ item }) {
         return (
+            <View style={{width:350}}>
             <PlaybackItem 
                 key={item.uri}
                 uri={item.uri}
@@ -85,6 +86,7 @@ function PlaybackScreen(props){
                 onDelete={() => deleteRecording(item.uri)}
                 setPosition={setPosition}
             />
+            </View>
         );
     }
     
